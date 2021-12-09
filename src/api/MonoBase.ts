@@ -12,6 +12,6 @@ export class MonoBase {
       this.cache[addressNumber] = obj
     }
 
-    return (this.cache[addressNumber] as undefined) as T
+    return this.cache[addressNumber] as undefined as T
   }
 }

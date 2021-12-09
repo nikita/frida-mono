@@ -4,7 +4,7 @@ module.exports = {
     ecmaVersion: 2020,
     sourceType: 'module'
   },
-  extends: ['plugin:@typescript-eslint/recommended', 'prettier/@typescript-eslint', 'plugin:prettier/recommended'],
+  extends: ['plugin:@typescript-eslint/recommended', 'plugin:prettier/recommended'],
   ignorePatterns: ['.cache', 'lib/', 'node_modules/', 'src2/'],
   rules: {
     '@typescript-eslint/no-var-requires': 'off',
