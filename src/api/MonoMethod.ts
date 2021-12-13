@@ -12,7 +12,7 @@ export class MonoMethod extends MonoBase {
    * @returns {boolean} TRUE if the given method is allowed to access the field while following the accessibility rules of the CLI.
    */
   canAccessField(field: MonoClassField): boolean {
-    return mono_method_can_access_field(this.$address, field.$address)
+    return Boolean(mono_method_can_access_field(this.$address, field.$address))
   }
 
   /**
@@ -21,6 +21,6 @@ export class MonoMethod extends MonoBase {
    * @returns {boolean} TRUE if the given method is allowed to invoke the called while following the accessibility rules of the CLI.
    */
   canAccessMethod(called: MonoMethod): boolean {
-    return mono_method_can_access_method(this.$address, called.$address)
+    return Boolean(mono_method_can_access_method(this.$address, called.$address))
   }
 }

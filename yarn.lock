@@ -135,10 +135,10 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
   integrity sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
 
-"@types/frida-gum@^16.2.0":
-  version "16.5.1"
-  resolved "https://registry.yarnpkg.com/@types/frida-gum/-/frida-gum-16.5.1.tgz#7dd5690a08564741b73eba6cb21cdb11a95a1de7"
-  integrity sha512-t+2HZG6iBO2cEKtb2KvtP33m/7TGmzSd42YqznToA34+TkS97NttsFZ9OY2s0hPyDQOg+hZTjR1QggRkEL/Ovg==
+"@types/frida-gum@^17.3.0":
+  version "17.3.0"
+  resolved "https://registry.yarnpkg.com/@types/frida-gum/-/frida-gum-17.3.0.tgz#a6f141fbb6a647a3fd1cd13b9a11d4b27104adec"
+  integrity sha512-ZUgg8NtPVTarFrDDMFDK5Q9mGbgsQskTn1+wLnn2ZUcpsFum2NyhZo10tQxLsgOSlH2bvnjwvCE6HhHs9BjgoA==
 
 "@types/json-schema@^7.0.9":
   version "7.0.9"

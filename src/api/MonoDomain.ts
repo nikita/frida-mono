@@ -38,14 +38,14 @@ export class MonoDomain extends MonoBase {
    * @returns {boolean} TRUE if the AppDomain.TypeResolve field has been set.
    */
   get hasTypeResolve(): boolean {
-    return mono_domain_has_type_resolve(this.$address)
+    return Boolean(mono_domain_has_type_resolve(this.$address))
   }
 
   /**
    * @returns {boolean}
    */
   get isUnloading(): boolean {
-    return mono_domain_is_unloading(this.$address)
+    return Boolean(mono_domain_is_unloading(this.$address))
   }
 
   /**
@@ -64,7 +64,7 @@ export class MonoDomain extends MonoBase {
    * @returns {boolean} TRUE if succeeded, FALSE if there was a timeout
    */
   finalize(timeout: number): boolean {
-    return mono_domain_finalize(this.$address, timeout)
+    return Boolean(mono_domain_finalize(this.$address, timeout))
   }
 
   /**
@@ -72,7 +72,7 @@ export class MonoDomain extends MonoBase {
    * @param {boolean} force if true, it allows the root domain to be released (used at shutdown only).
    */
   free(force: boolean): void {
-    mono_domain_free(this.$address, force)
+    mono_domain_free(this.$address, Number(force))
   }
 
   /**
@@ -109,7 +109,7 @@ export class MonoDomain extends MonoBase {
    * @returns {boolean} TRUE on success; FALSE if the domain is unloaded
    */
   set(force: boolean): boolean {
-    return mono_domain_set(this.$address, force)
+    return Boolean(mono_domain_set(this.$address, Number(force)))
   }
 
   /**

@@ -3,20 +3,15 @@
  * Otherwise we would have to store the informations somewhere else.
  * This way its attached to the NativeFunction. Awesome!
  */
-interface ExNativeFunction extends NativePointer {
-  (...args: NativeArgumentValue[]): any // eslint-disable-line @typescript-eslint/no-explicit-any
-  apply(thisArg: NativePointerValue | null | undefined, args: NativeArgumentValue[]): any // eslint-disable-line @typescript-eslint/no-explicit-any
-  call(thisArg?: NativePointerValue | null, ...args: NativeArgumentValue[]): any // eslint-disable-line @typescript-eslint/no-explicit-any
-}
 
-class ExNativeFunction extends NativeFunction {
+class ExNativeFunction<RetType extends NativeFunctionReturnType, ArgTypes extends NativeFunctionArgumentType[] | []> extends NativeFunction<RetType, ArgTypes> {
   public address: NativePointerValue
-  public retType: NativeType
-  public argTypes: NativeType[]
+  public retType: RetType
+  public argTypes: ArgTypes
   public abi: NativeABI = 'default'
   public options: NativeFunctionOptions
 
-  constructor(address: NativePointerValue, retType: NativeType = 'void', argTypes: NativeType[] = [], abiOrOptions: NativeFunctionOptions | NativeABI = 'default') {
+  constructor(address: NativePointerValue, retType: RetType, argTypes: ArgTypes, abiOrOptions?: NativeABI | NativeFunctionOptions) {
     super(address, retType, argTypes, abiOrOptions)
 
     this.address = address
@@ -31,8 +26,10 @@ class ExNativeFunction extends NativeFunction {
     }
   }
 
-  nativeCallback(callback: NativeCallbackImplementation): NativeCallback {
-    return new NativeCallback(callback, this.retType, this.argTypes, this.abi)
+  nativeCallback<RetType extends NativeCallbackReturnType, ArgTypes extends NativeCallbackArgumentType[] | []>(
+    callback: NativeCallbackImplementation<GetNativeCallbackReturnValue<RetType>, Extract<GetNativeCallbackArgumentValue<ArgTypes>, unknown[]>>
+  ) {
+    return new NativeCallback(callback, this.retType as unknown as RetType, this.argTypes as unknown as ArgTypes, this.abi)
   }
 
   intercept(callbacksOrProbe: ScriptInvocationListenerCallbacks | NativeInvocationListenerCallbacks | InstructionProbeCallback, data?: NativePointerValue): InvocationListener {

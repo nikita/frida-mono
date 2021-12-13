@@ -81,7 +81,7 @@ export class MonoAssembly extends MonoBase {
    * @returns {MonoAssembly} The assembly for the application, the first assembly that is loaded by the VM
    */
   static get main(): MonoAssembly {
-    const address = mono_assembly_get_main(NULL)
+    const address = mono_assembly_get_main(null)
     return MonoAssembly.fromAddress(address)
   }
 
@@ -90,7 +90,7 @@ export class MonoAssembly extends MonoBase {
    * @returns {string} A string with the directory, this string should not be freed.
    */
   static get rootDir(): string {
-    return mono_assembly_getrootdir(NULL).readUtf8String()
+    return mono_assembly_getrootdir(null).readUtf8String()
   }
 
   /**
@@ -147,7 +147,7 @@ export class MonoAssembly extends MonoBase {
     if (typeof name === 'string') name = new MonoAssemblyName(name)
 
     const status = Memory.alloc(Process.pointerSize)
-    const address = mono_assembly_load_full(name.$address, Memory.allocUtf8String(basedir), status, refOnly)
+    const address = mono_assembly_load_full(name.$address, Memory.allocUtf8String(basedir), status, Number(refOnly))
     if (address.isNull()) {
       throw new Error('Failed loading MonoAssembly! Error: ' + MonoImageOpenStatus[status.readInt()])
     }
@@ -169,7 +169,7 @@ export class MonoAssembly extends MonoBase {
   static loadedFull(name: string | MonoAssemblyName, refOnly: boolean): MonoAssembly {
     if (typeof name === 'string') name = new MonoAssemblyName(name)
 
-    const address = mono_assembly_loaded_full(name.$address, refOnly)
+    const address = mono_assembly_loaded_full(name.$address, Number(refOnly))
     return MonoAssembly.fromAddress(address)
   }
 
@@ -200,7 +200,7 @@ export class MonoAssembly extends MonoBase {
    */
   static loadFromFull(image: MonoImage, name: string, refOnly: boolean): MonoAssembly {
     const status = Memory.alloc(Process.pointerSize)
-    const address = mono_assembly_load_from_full(image.$address, Memory.allocUtf8String(name), status, refOnly)
+    const address = mono_assembly_load_from_full(image.$address, Memory.allocUtf8String(name), status, Number(refOnly))
     if (address.isNull()) {
       throw new Error('Failed loading MonoAssembly! Error: ' + MonoImageOpenStatus[status.readInt()])
     }
@@ -248,7 +248,7 @@ export class MonoAssembly extends MonoBase {
    */
   static openFull(filename: string, refOnly: boolean): MonoAssembly {
     const status = Memory.alloc(Process.pointerSize)
-    const address = mono_assembly_open_full(Memory.allocUtf8String(filename), status, refOnly)
+    const address = mono_assembly_open_full(Memory.allocUtf8String(filename), status, Number(refOnly))
     if (address.isNull()) {
       throw new Error('Failed opening MonoAssembly! Error: ' + MonoImageOpenStatus[status.readInt()])
     }

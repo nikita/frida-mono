@@ -270,7 +270,7 @@ export class MonoClass extends MonoBase {
    */
   get isDelegate(): boolean {
     // TODO: Check if this really returns bool or something else. In docu they say "mono_bool"
-    return mono_class_is_delegate(this.$address)
+    return Boolean(mono_class_is_delegate(this.$address))
   }
 
   /**
@@ -278,7 +278,7 @@ export class MonoClass extends MonoBase {
    * @returns {boolean} TRUE if the MonoClass represents a ValueType, FALSE if it represents a reference type.
    */
   get isValuetype(): boolean {
-    return mono_class_is_valuetype(this.$address)
+    return Boolean(mono_class_is_valuetype(this.$address))
   }
 
   /**
@@ -286,7 +286,7 @@ export class MonoClass extends MonoBase {
    * @returns {boolean} TRUE if the MonoClass represents an enumeration.
    */
   get isEnum(): boolean {
-    return mono_class_is_enum(this.$address)
+    return Boolean(mono_class_is_enum(this.$address))
   }
 
   /**
@@ -326,7 +326,7 @@ export class MonoClass extends MonoBase {
    * @returns {boolean} Returns true on success
    */
   init(): boolean {
-    return mono_class_init(this.$address)
+    return Boolean(mono_class_init(this.$address))
   }
 
   /**
@@ -334,7 +334,7 @@ export class MonoClass extends MonoBase {
    * @returns {boolean} TRUE if class implements interface.
    */
   implementsInterface(iface: MonoClass): boolean {
-    return mono_class_implements_interface(this.$address, iface.$address)
+    return Boolean(mono_class_implements_interface(this.$address, iface.$address))
   }
 
   /**
@@ -342,7 +342,7 @@ export class MonoClass extends MonoBase {
    * @returns {boolean} TRUE if an instance of object oClass can be assigned to an instance of object klass
    */
   isAssignableFrom(oClass: MonoClass): boolean {
-    return mono_class_is_assignable_from(this.$address, oClass.$address)
+    return Boolean(mono_class_is_assignable_from(this.$address, oClass.$address))
   }
 
   /**
@@ -355,7 +355,7 @@ export class MonoClass extends MonoBase {
    * @returns {boolean}
    */
   isSubclassOf(oClass: MonoClass, checkInterfaces: boolean): boolean {
-    return mono_class_is_subclass_of(this.$address, oClass.$address, checkInterfaces)
+    return Boolean(mono_class_is_subclass_of(this.$address, oClass.$address, Number(checkInterfaces)))
   }
 
   /**
@@ -384,10 +384,10 @@ export class MonoClass extends MonoBase {
   getFields(): Array<MonoClassField> {
     const fields: Array<MonoClassField> = []
     const iter = Memory.alloc(Process.pointerSize)
-    let field: MonoClassField
+    let field: MonoClassField | NativePointer
 
     while (!(field = mono_class_get_fields(this.$address, iter)).isNull()) {
-      fields.push(field)
+      fields.push(field as unknown as MonoClassField)
     }
 
     return fields
@@ -531,7 +531,7 @@ export class MonoClass extends MonoBase {
    * @returns {MonoClass}
    */
   static fromGenericParameter(param: MonoGenericParam): MonoClass {
-    const address = mono_class_from_generic_parameter(param.$address, NULL, false)
+    const address = mono_class_from_generic_parameter(param.$address, NULL, Number(false))
     return MonoClass.fromAddress(address)
   }
 }

@@ -94,7 +94,7 @@ export class MonoImage extends MonoBase {
    * @returns {boolean}
    */
   fillAssemblyName(assemblyName: string): boolean {
-    return mono_assembly_fill_assembly_name(this.$address, Memory.allocUtf8String(assemblyName))
+    return Boolean(mono_assembly_fill_assembly_name(this.$address, Memory.allocUtf8String(assemblyName)))
   }
 
   /**
