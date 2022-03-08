@@ -12,6 +12,7 @@ export const mono_image_get_table_info = createNativeFunction('mono_image_get_ta
 export const mono_assembly_get_assemblyref = createNativeFunction('mono_assembly_get_assemblyref', 'void', ['pointer', 'int', 'pointer'])
 export const mono_assembly_fill_assembly_name = createNativeFunction('mono_assembly_fill_assembly_name', 'bool', ['pointer', 'pointer'])
 export const mono_assembly_load_reference = createNativeFunction('mono_assembly_load_reference', 'void', ['pointer', 'int'])
+export const mono_image_get_table_rows = createNativeFunction('mono_image_get_table_rows', 'int', ['pointer', 'int'])
 
 /*
 std::list<MonoClass*> GetAssemblyClassList(MonoImage * image)
@@ -77,6 +78,14 @@ export class MonoImage extends MonoBase {
   getTableInfo(tableId: MonoMetaTableEnum): MonoTableInfo {
     const address = mono_image_get_table_info(this.$address, tableId)
     return MonoTableInfo.fromAddress(address)
+  }
+
+  /**
+   * This returns the table rows for a mono image
+   * @returns {number}
+   */
+  getTableRows(): number {
+    return mono_image_get_table_rows(this.$address, MonoMetaTableEnum.MONO_TABLE_TYPEDEF)
   }
 
   /**
