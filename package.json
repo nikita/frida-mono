@@ -1,7 +1,7 @@
 {
   "name": "frida-mono",
   "description": "This is a wrapper around the mono api.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint . --fix",
@@ -11,21 +11,21 @@
   "dependencies": {},
   "devDependencies": {
     "@rbnlffl/rollup-plugin-eslint": "^3.0.0",
-    "@rollup/plugin-typescript": "8.3.0",
-    "@types/frida-gum": "^17.3.0",
-    "@typescript-eslint/eslint-plugin": "^5.6.0",
-    "@typescript-eslint/parser": "^5.6.0",
-    "eslint": "^7.13.0",
-    "eslint-config-prettier": "^8.3.0",
+    "@rollup/plugin-typescript": "^8.3.1",
+    "@types/frida-gum": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.14.0",
+    "@typescript-eslint/parser": "^5.14.0",
+    "eslint": "^8.10.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "frida": "^15.1.14",
+    "frida": "^15.1.17",
     "prettier": "^2.5.1",
-    "rollup": "^2.61.0",
+    "rollup": "^2.70.0",
     "tslib": "^2.3.1",
-    "typescript": "^4.5.2"
+    "typescript": "^4.6.2"
   },
   "peerDependencies": {
-    "frida": "^15.1.14"
+    "frida": "^15.1.17"
   },
   "author": "FreehuntX",
   "homepage": "https://github.com/freehuntx/frida-mono#readme",
