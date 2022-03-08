@@ -1,4 +1,4 @@
-const KNOWN_RUNTIMES = ['mono.dll', 'libmonosgen-2.0.so']
+const KNOWN_RUNTIMES = ['mono.dll', 'libmonosgen-2.0.so', 'libmono-native.so']
 const KNOWN_EXPORTS = ['mono_thread_attach']
 const KNOWN_STRINGS = ["'%s' in MONO_PATH doesn't exist or has wrong permissions"]
 
